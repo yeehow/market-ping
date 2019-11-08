@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'gamefont';
+            src: url('./font2.ttf');
+        }
+
+        html,
+        body {
+            font-family: gamefont !important;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 2em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        #ping {
+            font-size: 1.5em;
+            margin-bottom: 2em;
+        }
+
+        .yeehow {
+            color: #fff;
+            font-size: 0.75em;
+            opacity: 0.5;
+            text-decoration: none;
+        }
+
+        .yeehow:hover {
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Krunker Market Ping</p>
+    <p id="ping">loading</p>
+    <a href="https://yee.how" class="yeehow">yeehow</a>
+
+    <script src="./js/msgpack.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
