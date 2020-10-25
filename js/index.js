@@ -1,3 +1,9 @@
+let delay = 2500;
+
+let start;
+let end;
+let ping;
+
 var ctx = document.getElementById('myChart').getContext('2d');
 
 var chart = new Chart(ctx, {
@@ -40,33 +46,15 @@ var chart = new Chart(ctx, {
 	}
 });
 
-this.socket = new WebSocket('wss://krunker_social.krunker.io/ws');
-
-var pingEncoded = msgpack.serialize([ 'po', [] ]).buffer;
-
-this.socket.onopen = () => {
-	console.log('connected');
-	pong();
-};
-
-this.socket.onmessage = async function(event) {
-	var blob = event.data;
-	var arrayBuffer = null;
-
-	arrayBuffer = await new Response(blob).arrayBuffer();
-
-	var data = msgpack.deserialize(arrayBuffer);
-
-	if (data[0] == 'pi') {
-		pong();
-	} else if (data[0] == 'pir') {
-		const ping = 2 * data[1];
-		displayPing(ping);
-	}
-};
-
 function pong() {
-	this.socket.send(pingEncoded);
+    start = Date.now();
+	fetch("https://social.krunker.io", { mode: "no-cors" })
+        .then(() => {
+            end = Date.now();
+            ping = end - start;
+            displayPing(ping);
+            setTimeout(pong, delay)
+        })  
 }
 
 function displayPing(value) {
@@ -81,3 +69,5 @@ function add(data) {
 	});
 	chart.update();
 }
+
+pong();
